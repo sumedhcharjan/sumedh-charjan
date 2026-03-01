@@ -19,12 +19,29 @@ export default function Portfolio() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col ${
-        theme === 'retro'
-          ? 'bg-gray-900 font-mono'
-          : 'bg-gradient-to-br from-gray-900 via-purple-900 to-orange-900 font-sans'
-      } text-gray-100`}
+      className={`min-h-screen flex flex-col relative overflow-hidden transition-colors duration-500 ${theme === 'retro'
+          ? 'bg-gray-900 font-mono text-gray-100'
+          : 'bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 font-sans text-gray-900'
+        }`}
     >
+      {/* Animated background accents for sunset theme */}
+      {theme === 'sunset' && (
+        <div className="fixed inset-0 pointer-events-none z-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/40 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-200/30 rounded-full blur-3xl animate-pulse [animation-delay:2s]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-100/20 rounded-full blur-3xl animate-pulse [animation-delay:4s]" />
+        </div>
+      )}
+
+      {/* Retro theme scanline effect */}
+      {theme === 'retro' && (
+        <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.1) 2px, rgba(0,255,0,0.1) 4px)',
+          }}
+        />
+      )}
+
       <Navigation
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -33,7 +50,7 @@ export default function Portfolio() {
         cliMode={cliMode}
         setCliMode={setCliMode}
       />
-      <main className="flex-grow flex items-center justify-center px-4 py-10">
+      <main className="flex-grow flex items-center justify-center px-4 py-10 relative z-10">
         <div className="w-full max-w-4xl">
           {cliMode ? (
             <CLI theme={theme} setActiveSection={setActiveSection} setTheme={setTheme} setCliMode={setCliMode} />
@@ -61,13 +78,11 @@ export default function Portfolio() {
         </div>
       </main>
       <footer
-        className={`text-center py-6 text-gray-500 text-sm ${
-          theme === 'retro' ? 'font-mono' : 'font-sans'
-        }`}
+        className={`text-center py-6 text-sm relative z-10 ${theme === 'retro' ? 'font-mono text-gray-500' : 'font-sans text-gray-400'
+          }`}
       >
         © {new Date().getFullYear()} Sumedh. All rights reserved.
       </footer>
     </div>
   )
 }
-

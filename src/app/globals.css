@@ -81,5 +81,19 @@ body {
   }
 }
 
+/* Selection Colors */
+::selection {
+  background-color: rgba(168, 85, 247, 0.3);
+  color: #fff;
+}
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
+/* Custom focus styles */
+*:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.5);
+  outline-offset: 2px;
+}

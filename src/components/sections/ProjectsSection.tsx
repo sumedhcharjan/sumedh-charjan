@@ -38,29 +38,39 @@ export default function ProjectsSection({
     },
   }
 
-  const activeTheme = theme === "retro" 
+  const isRetro = theme === "retro"
+
+  const activeTheme = isRetro
     ? {
-        primary: "text-green-400",
-        secondary: "text-green-200",
-        border: "border-green-500",
-        bgGradient: "from-gray-900 via-gray-900/90 to-black",
-        button: "bg-green-500 hover:bg-green-600",
-        buttonDisabled: "bg-green-500/40",
-        font: "font-mono",
-        badge: "bg-green-700/30 text-green-100",
-        highlight: "bg-green-500/10",
-      }
+      primary: "text-green-400",
+      secondary: "text-green-200",
+      border: "border-green-500",
+      bgGradient: "from-gray-900 via-gray-900/90 to-black",
+      button: "bg-green-500 hover:bg-green-600",
+      buttonDisabled: "bg-green-500/40",
+      buttonText: "text-black",
+      font: "font-mono",
+      badge: "bg-green-700/30 text-green-100",
+      highlight: "bg-green-500/10",
+      textBody: "text-gray-300",
+      textMuted: "text-gray-400",
+      paginationHover: "hover:bg-gray-700",
+    }
     : {
-        primary: "text-orange-400",
-        secondary: "text-orange-200",
-        border: "border-orange-500",
-        bgGradient: "from-gray-900 via-gray-900/90 to-black",
-        button: "bg-orange-500 hover:bg-orange-600",
-        buttonDisabled: "bg-orange-500/40",
-        font: "font-sans",
-        badge: "bg-orange-700/30 text-orange-100",
-        highlight: "bg-orange-500/10",
-      }
+      primary: "text-orange-600",
+      secondary: "text-orange-500",
+      border: "border-orange-300",
+      bgGradient: "from-white via-orange-50/50 to-amber-50",
+      button: "bg-orange-500 hover:bg-orange-600",
+      buttonDisabled: "bg-orange-500/40",
+      buttonText: "text-white",
+      font: "font-sans",
+      badge: "bg-orange-100 text-orange-700",
+      highlight: "bg-orange-500/10",
+      textBody: "text-gray-600",
+      textMuted: "text-gray-500",
+      paginationHover: "hover:bg-orange-100",
+    }
 
   return (
     <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-20">
@@ -73,7 +83,7 @@ export default function ProjectsSection({
         <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold ${activeTheme.primary} ${activeTheme.font} text-center`}>
           Featured Projects
         </h2>
-        <p className={`mt-3 text-gray-400 ${activeTheme.font} text-center max-w-xl`}>
+        <p className={`mt-3 ${activeTheme.textMuted} ${activeTheme.font} text-center max-w-xl`}>
           A showcase of my recent work and technical expertise
         </p>
       </motion.div>
@@ -86,18 +96,18 @@ export default function ProjectsSection({
         onMouseLeave={() => setFocusedId(null)}
       >
         {currentItems.map((project: Project) => (
-          <motion.div 
-            key={project.id} 
+          <motion.div
+            key={project.id}
             variants={itemVariants}
             onMouseEnter={() => setFocusedId(project.id)}
-            className={`rounded-xl sm:rounded-2xl overflow-hidden border ${activeTheme.border} shadow-xl bg-gradient-to-br ${activeTheme.bgGradient} backdrop-blur-md transition-all duration-500 
-              ${focusedId === null || focusedId === project.id 
-                ? 'scale-100 opacity-100 shadow-xl' 
+            className={`rounded-xl sm:rounded-2xl overflow-hidden border ${activeTheme.border} shadow-xl bg-gradient-to-br ${activeTheme.bgGradient} backdrop-blur-md transition-all duration-500
+              ${focusedId === null || focusedId === project.id
+                ? 'scale-100 opacity-100 shadow-xl'
                 : 'scale-95 opacity-50 blur-[1px]'}`}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 h-full">
               <div className="relative h-52 sm:h-64 lg:h-full overflow-hidden">
-                <div className={`absolute inset-0 bg-black/20 z-10 transition-opacity duration-300 ${focusedId === project.id ? 'opacity-0' : 'opacity-100'}`}></div>
+                <div className={`absolute inset-0 ${isRetro ? 'bg-black/20' : 'bg-black/10'} z-10 transition-opacity duration-300 ${focusedId === project.id ? 'opacity-0' : 'opacity-100'}`}></div>
                 <Image
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
@@ -106,16 +116,16 @@ export default function ProjectsSection({
                   className={`object-cover transition-all duration-700 ${focusedId === project.id ? 'scale-105' : 'scale-100'}`}
                 />
               </div>
-              
+
               <div className="p-5 sm:p-8 flex flex-col justify-between h-full">
                 <div>
                   <h3 className={`text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 ${activeTheme.primary} ${activeTheme.font}`}>
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                  <p className={`${activeTheme.textBody} leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base`}>
                     {project.description}
                   </p>
-                  
+
                   <div className="mb-5 sm:mb-8">
                     <h4 className={`text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-3 ${activeTheme.secondary} ${activeTheme.font}`}>
                       Technologies
@@ -139,7 +149,7 @@ export default function ProjectsSection({
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center px-4 sm:px-6 py-1.5 sm:py-2 rounded-full ${activeTheme.button} text-black font-medium transition-all duration-300 text-sm sm:text-base`}
+                    className={`flex items-center px-4 sm:px-6 py-1.5 sm:py-2 rounded-full ${activeTheme.button} ${activeTheme.buttonText} font-medium transition-all duration-300 text-sm sm:text-base`}
                   >
                     <GithubIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
                     GitHub
@@ -149,7 +159,7 @@ export default function ProjectsSection({
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center px-4 sm:px-6 py-1.5 sm:py-2 rounded-full ${activeTheme.button} text-black font-medium transition-all duration-300 text-sm sm:text-base`}
+                    className={`flex items-center px-4 sm:px-6 py-1.5 sm:py-2 rounded-full ${activeTheme.button} ${activeTheme.buttonText} font-medium transition-all duration-300 text-sm sm:text-base`}
                   >
                     <EyeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
                     Live Demo
@@ -162,28 +172,28 @@ export default function ProjectsSection({
       </motion.div>
 
       {projects.length > 3 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
           className="flex justify-center gap-4 items-center mt-12 sm:mt-16"
         >
-          <button 
-            onClick={prevPage} 
+          <button
+            onClick={prevPage}
             disabled={currentPage === 1}
-            className={`p-2 rounded-full ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-700'} ${activeTheme.primary}`}
+            className={`p-2 rounded-full ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : activeTheme.paginationHover} ${activeTheme.primary}`}
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
-          
+
           <span className={`${activeTheme.primary} ${activeTheme.font} text-sm sm:text-base`}>
             Page {currentPage} of {maxPage}
           </span>
-          
-          <button 
-            onClick={nextPage} 
+
+          <button
+            onClick={nextPage}
             disabled={currentPage === maxPage}
-            className={`p-2 rounded-full ${currentPage === maxPage ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-700'} ${activeTheme.primary}`}
+            className={`p-2 rounded-full ${currentPage === maxPage ? 'opacity-50 cursor-not-allowed' : activeTheme.paginationHover} ${activeTheme.primary}`}
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
@@ -192,4 +202,3 @@ export default function ProjectsSection({
     </section>
   )
 }
-

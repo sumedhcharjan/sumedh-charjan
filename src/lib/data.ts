@@ -4,7 +4,7 @@ export const projects = [
     title: "TrackVault",
     description:
       "A secure file-sharing platform with support for file uploads, user authentication, and public/private access control. Includes Redis-based analytics to track views and downloads with auto-destruction rules, and uses AWS S3 for scalable, private file storage. Deployed on AWS EC2 with scalability and reliability in mind.",
-    image: "/file.svg",
+    image: "/trackvault.png",
     github: "#",
     live: "#",
     techStack: "Next.js, Supabase, Redis, AWS S3, Kinde, AWS EC2",
@@ -14,7 +14,7 @@ export const projects = [
     title: "CollabBoard",
     description:
       "A real-time collaborative whiteboard built with the MERN stack and Socket.IO for live synchronization. Uses Rough.js to render hand-drawn style sketches, includes integrated real-time chat, and persists board state in MongoDB for session recovery.",
-    image: "/window.svg",
+    image: "/collabboard.png",
     github: "#",
     live: "#",
     techStack: "MongoDB, Express.js, React, Node.js, Socket.IO, Rough.js",
@@ -24,7 +24,7 @@ export const projects = [
     title: "Job Portal",
     description:
       "A job platform with dynamic filtering by location, salary, and role type, plus a responsive employer dashboard for posting jobs and viewing insights. Supports real-time candidate–employer communication with instant notifications and integrates Agora for video interview scheduling inside the platform.",
-    image: "/window.svg",
+    image: "/job-portal.png",
     github: "#",
     live: "#",
     techStack: "MongoDB, Express.js, React, Node.js, JWT, Cloudinary, Agora",

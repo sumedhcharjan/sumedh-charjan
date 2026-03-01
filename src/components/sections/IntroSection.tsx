@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { Briefcase, Download, Github, Linkedin, Twitter, Code } from "lucide-react"
+import { Briefcase, Download, Github, Linkedin, Code } from "lucide-react"
 import Image from "next/image"
 import { useCallback } from "react"
 import type { Section } from "../Navigation"
@@ -36,20 +36,22 @@ const getThemeStyles = (theme: "retro" | "sunset") => {
   const isRetro = theme === "retro"
   return {
     font: isRetro ? "font-mono" : "font-sans",
-    color: isRetro ? "text-green-400" : "text-orange-400",
-    hoverColor: isRetro ? "hover:text-green-300" : "hover:text-orange-300",
+    color: isRetro ? "text-green-400" : "text-orange-600",
+    hoverColor: isRetro ? "hover:text-green-300" : "hover:text-orange-700",
     borderColor: isRetro ? "border-green-400" : "border-orange-400",
-    buttonBg: isRetro ? "bg-green-400 text-black hover:bg-green-500" : "bg-orange-400 text-white hover:bg-orange-500",
-    outlineBtn:
-      isRetro
-        ? "bg-transparent text-green-400 border-2 border-green-400 hover:bg-green-400 hover:text-black"
-        : "bg-transparent text-orange-400 border-2 border-orange-400 hover:bg-orange-400 hover:text-black",
-    shadow: isRetro ? "shadow-lg shadow-green-400/50" : "",
+    buttonBg: isRetro
+      ? "bg-green-400 text-black hover:bg-green-500"
+      : "bg-orange-500 text-white hover:bg-orange-600",
+    outlineBtn: isRetro
+      ? "bg-transparent text-green-400 border-2 border-green-400 hover:bg-green-400 hover:text-black"
+      : "bg-transparent text-orange-600 border-2 border-orange-400 hover:bg-orange-500 hover:text-white",
+    shadow: isRetro ? "shadow-lg shadow-green-400/50" : "shadow-lg shadow-orange-300/30",
     imgBorder: isRetro ? "border-4 border-green-400" : "border-2 border-orange-400",
-    secondaryBtn:
-      isRetro
-        ? "bg-transparent text-green-200 border border-green-200 hover:bg-green-200 hover:text-black"
-        : "bg-transparent text-orange-200 border border-orange-200 hover:bg-orange-200 hover:text-black",
+    secondaryBtn: isRetro
+      ? "bg-transparent text-green-200 border border-green-200 hover:bg-green-200 hover:text-black"
+      : "bg-transparent text-orange-600 border border-orange-400 hover:bg-orange-500 hover:text-white",
+    textBody: isRetro ? "text-gray-300" : "text-gray-600",
+    textHeading: isRetro ? "text-gray-100" : "text-gray-900",
   }
 }
 
@@ -86,12 +88,12 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
               <div className="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
                 <Image src="/profile.jpg" alt="Sumedh Charjan" width={64} height={64} className="object-cover" priority />
               </div>
-              <h1 className={`text-2xl sm:text-3xl font-bold ${styles.font}`}>Sumedh Charjan</h1>
+              <h1 className={`text-2xl sm:text-3xl font-bold ${styles.font} ${styles.textHeading}`}>Sumedh Charjan</h1>
             </div>
 
             {/* Large Name */}
             <motion.div variants={itemVariants} className="hidden lg:block">
-              <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${styles.font}`}>
+              <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${styles.font} ${styles.textHeading}`}>
                 Hey! I&apos;m <span className={`${styles.color}`}>Sumedh Charjan</span>
               </h1>
             </motion.div>
@@ -105,7 +107,7 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
 
             {/* Bio */}
             <motion.div variants={itemVariants}>
-              <p className={`text-gray-300 text-base sm:text-lg mb-6 leading-relaxed ${styles.font}`}>
+              <p className={`${styles.textBody} text-base sm:text-lg mb-6 leading-relaxed ${styles.font}`}>
                 I&apos;m a B.Tech Electronics and Telecommunication Engineering student at VJTI, Mumbai with a minor in
                 Artificial Intelligence & Machine Learning. I enjoy building full stack products with a focus on clean,
                 reliable user experiences and strong backend architecture.
@@ -113,7 +115,7 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <p className={`text-gray-300 text-base sm:text-lg mb-8 leading-relaxed ${styles.font}`}>
+              <p className={`${styles.textBody} text-base sm:text-lg mb-8 leading-relaxed ${styles.font}`}>
                 I work primarily with the MERN/Next.js stack, building real-time collaboration tools, secure platforms
                 and scalable backend services. I&apos;m currently a MERN Developer Intern at FinED and actively solving
                 DSA problems (250+ on LeetCode) while contributing to tech communities at VJTI.
@@ -123,9 +125,8 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
             {/* Social Links */}
             <motion.div variants={itemVariants} className="flex gap-4 mb-8">
               {([
-                ["twitter", "#", Twitter],
-                ["linkedin", "#", Linkedin],
-                ["github", "https://github.com", Github],
+                ["github", "https://github.com/sumedhcharjan", Github],
+                ["linkedin", "https://www.linkedin.com/in/sumedh-charjan/", Linkedin],
               ] as [string, string, React.ElementType][]).map(([name, url, Icon]) => (
                 <a key={name}
                   href={url}
@@ -141,7 +142,7 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
             {/* Explore Work CTA Button - Mobile */}
             <motion.div variants={itemVariants} className="lg:hidden space-y-3 mb-6">
               <div className="flex flex-wrap gap-3">
-                <Button 
+                <Button
                   className={`flex items-center px-5 py-2 rounded-full text-sm ${styles.secondaryBtn} ${styles.font}`}
                   onClick={() => handleSectionChange("projects")}
                 >
@@ -169,7 +170,7 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
 
             {/* Explore Work CTA Button - Desktop */}
             <motion.div variants={itemVariants} className="w-full flex justify-center gap-4 mb-6">
-              <Button 
+              <Button
                 className={`flex items-center px-5 py-2 rounded-full ${styles.secondaryBtn} ${styles.font}`}
                 onClick={() => handleSectionChange("projects")}
               >
@@ -193,4 +194,3 @@ const IntroSection = ({ setActiveSection, theme = "retro" }: IntroProps) => {
 }
 
 export default IntroSection
-

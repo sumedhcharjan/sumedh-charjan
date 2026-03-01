@@ -34,7 +34,7 @@ export default function SkillsSection({ theme }: { theme: "retro" | "sunset" }) 
 
   const maxPage = categories.length
   const currentCategory = categories[currentPage - 1]
-  
+
   const nextPage = () => setCurrentPage((prev) => prev === maxPage ? 1 : prev + 1)
   const prevPage = () => setCurrentPage((prev) => prev === 1 ? maxPage : prev - 1)
 
@@ -43,33 +43,39 @@ export default function SkillsSection({ theme }: { theme: "retro" | "sunset" }) 
     const interval = setInterval(() => {
       nextPage()
     }, 20000)
-    
+
     return () => clearInterval(interval)
   }, [currentPage])
 
-  const activeTheme = theme === "retro" 
+  const isRetro = theme === "retro"
+
+  const activeTheme = isRetro
     ? {
-        primary: "text-green-400",
-        secondary: "text-green-200",
-        border: "border-green-500",
-        bg: "bg-gray-800",
-        bgGradient: "from-gray-900 to-gray-800",
-        button: "bg-green-500 hover:bg-green-600",
-        hoverBg: "hover:bg-gray-700",
-        font: "font-mono",
-        highlight: "bg-green-500/10"
-      }
+      primary: "text-green-400",
+      secondary: "text-green-200",
+      border: "border-green-500",
+      bg: "bg-gray-800",
+      bgGradient: "from-gray-900 to-gray-800",
+      button: "bg-green-500 hover:bg-green-600",
+      hoverBg: "hover:bg-gray-700",
+      font: "font-mono",
+      highlight: "bg-green-500/10",
+      textMuted: "text-gray-400",
+      paginationHover: "hover:bg-gray-700",
+    }
     : {
-        primary: "text-orange-400",
-        secondary: "text-orange-200",
-        border: "border-orange-500",
-        bg: "bg-gray-900",
-        bgGradient: "from-gray-800 to-black",
-        button: "bg-orange-500 hover:bg-orange-600",
-        hoverBg: "hover:bg-gray-800",
-        font: "font-sans",
-        highlight: "bg-orange-500/10"
-      }
+      primary: "text-orange-600",
+      secondary: "text-orange-500",
+      border: "border-orange-300",
+      bg: "bg-white",
+      bgGradient: "from-white to-orange-50",
+      button: "bg-orange-500 hover:bg-orange-600",
+      hoverBg: "hover:bg-orange-50",
+      font: "font-sans",
+      highlight: "bg-orange-500/10",
+      textMuted: "text-gray-500",
+      paginationHover: "hover:bg-orange-100",
+    }
 
   return (
     <section className="container mx-auto px-6 py-16">
@@ -82,7 +88,7 @@ export default function SkillsSection({ theme }: { theme: "retro" | "sunset" }) 
         <h2 className={`text-4xl md:text-5xl font-bold ${activeTheme.primary} ${activeTheme.font} text-center`}>
           Technical Skills
         </h2>
-        <p className={`mt-3 text-gray-400 ${activeTheme.font} text-center max-w-xl`}>
+        <p className={`mt-3 ${activeTheme.textMuted} ${activeTheme.font} text-center max-w-xl`}>
           Technologies and tools I work with
         </p>
       </motion.div>
@@ -136,26 +142,26 @@ export default function SkillsSection({ theme }: { theme: "retro" | "sunset" }) 
       </div>
 
       {categories.length > 1 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
           className="flex justify-center gap-4 items-center mt-12"
         >
-          <button 
+          <button
             onClick={prevPage}
-            className={`p-2 rounded-full hover:bg-gray-700 ${activeTheme.primary}`}
+            className={`p-2 rounded-full ${activeTheme.paginationHover} ${activeTheme.primary}`}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
-          
+
           <span className={`${activeTheme.primary} ${activeTheme.font}`}>
             Page {currentPage} of {maxPage}
           </span>
-          
-          <button 
+
+          <button
             onClick={nextPage}
-            className={`p-2 rounded-full hover:bg-gray-700 ${activeTheme.primary}`}
+            className={`p-2 rounded-full ${activeTheme.paginationHover} ${activeTheme.primary}`}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -164,4 +170,3 @@ export default function SkillsSection({ theme }: { theme: "retro" | "sunset" }) 
     </section>
   )
 }
-
