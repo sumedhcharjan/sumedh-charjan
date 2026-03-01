@@ -1,9 +1,5 @@
 import type { IconType } from "react-icons";
 import {
-  SiAmazonaws,
-  SiApachekafka,
-  SiCplusplus,
-  SiCloudinary,
   SiCss3,
   SiDocker,
   SiExpress,
@@ -25,15 +21,21 @@ import {
   SiTailwindcss,
   SiTrpc,
   SiTypescript,
-  SiWindows
 } from "react-icons/si";
 
 import { DiDatabase } from "react-icons/di";
+import {
+  FaCode,
+  FaCloud,
+  FaAws,
+  FaWindows,
+} from "react-icons/fa";
+import { SiApachekafka as FaKafka } from "react-icons/si";
 
 // Map only the skills from the array to their corresponding icons
 export const techLogos: Record<string, IconType> = {
-  C: SiCplusplus,
-  "C++": SiCplusplus,
+  C: FaCode,
+  "C++": FaCode,
   JavaScript: SiJavascript,
   TypeScript: SiTypescript,
   HTML: SiHtml5,
@@ -52,18 +54,17 @@ export const techLogos: Record<string, IconType> = {
   Redux: SiRedux,
   "Socket.IO": SiSocketdotio,
   Linux: SiLinux,
-  Windows: SiWindows,
+  Windows: FaWindows,
   Git: SiGithub,
   GitHub: SiGithub,
-  Cloudinary: SiCloudinary,
-  AWS: SiAmazonaws,
+  Cloudinary: FaCloud,
+  AWS: FaAws,
   Supabase: SiSupabase,
   "Prisma ORM": SiPrisma,
   "Drizzle ORM": DiDatabase,
-  Kafka: SiApachekafka,
-  "Tanstack-Query": SiReactquery
+  Kafka: FaKafka,
+  "Tanstack-Query": SiReactquery,
+  "Agora SDK": FaCode,
+  "Rough.js": FaCode,
+  KindeAuth: FaCode,
 }
-
-// Skills array
-
-
